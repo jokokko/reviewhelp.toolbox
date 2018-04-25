@@ -75,10 +75,10 @@ class TestClass {
 
 			var grouped = wirings.GroupBy(x => x.Lifecycle).ToDictionary(x => x.Key, x => x.ToArray());
 			
-			Assert.Equal(15, grouped[Lifecycle.Singleton].Length);
-			Assert.Equal(2, grouped[Lifecycle.Unique].Length);
-			Assert.Equal(3, grouped[Lifecycle.Transient].Length);
-			Assert.Equal(2, grouped[Lifecycle.TransientImplicit].Length);
+			Assert.Equal(15, grouped[StructureMapLifecycle.Singleton].Length);
+			Assert.Equal(2, grouped[StructureMapLifecycle.Unique].Length);
+			Assert.Equal(3, grouped[StructureMapLifecycle.Transient].Length);
+			Assert.Equal(2, grouped[StructureMapLifecycle.TransientImplicit].Length);
 		}
 	}
 }

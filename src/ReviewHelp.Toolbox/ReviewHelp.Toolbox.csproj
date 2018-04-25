@@ -44,6 +44,9 @@
     <Reference Include="Colorful.Console, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Colorful.Console.1.2.6\lib\net461\Colorful.Console.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.8.1.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.1\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Build.Framework, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Build.Framework.15.6.82\lib\net46\Microsoft.Build.Framework.dll</HintPath>
       <Private>True</Private>
@@ -67,8 +70,8 @@
     <Reference Include="Microsoft.CodeAnalysis.Workspaces.Desktop, Version=2.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeAnalysis.Workspaces.Common.2.7.0\lib\net46\Microsoft.CodeAnalysis.Workspaces.Desktop.dll</HintPath>
     </Reference>
-    <Reference Include="Oakton, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Oakton.1.4.0\lib\net46\Oakton.dll</HintPath>
+    <Reference Include="Oakton, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Oakton.1.5.0\lib\net46\Oakton.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.AppContext, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -183,8 +186,8 @@
     <Compile Include="..\Version.cs">
       <Link>Version.cs</Link>
     </Compile>
-    <Compile Include="Model\Lifecycle.cs" />
-    <Compile Include="Model\WiringCtx.cs" />
+    <Compile Include="Model\StructureMapLifecycle.cs" />
+    <Compile Include="Model\StructureMapWiringCtx.cs" />
     <Compile Include="Commands\AnalyzeStructureMapWirings.cs" />
     <Compile Include="Model\Descriptors.cs" />
     <Compile Include="Infrastructure\Constants.cs" />
@@ -195,8 +198,13 @@
     <Compile Include="Infrastructure\RuleCategory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Analyzers\StructureMapWiringAnalyzer.cs" />
+    <Compile Include="Services\HtmlFormattingExtensions.cs" />
+    <Compile Include="Services\IStructureMapWiringReporter.cs" />
     <Compile Include="Services\StructureMapWiringCataloger.cs" />
     <Compile Include="Model\SolutionInput.cs" />
+    <Compile Include="Services\StructureMapWiringConsoleReporter.cs" />
+    <Compile Include="Services\StructureMapWiringHtmlReporter.cs" />
+    <Compile Include="Model\Theme.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

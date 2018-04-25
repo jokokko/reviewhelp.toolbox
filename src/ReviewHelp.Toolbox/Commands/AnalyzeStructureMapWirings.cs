@@ -22,7 +22,13 @@ namespace ReviewHelp.Toolbox.Commands
 		        solutionProperties["TargetFramework"] = input.TargetFrameworkFlag;
 	        }
 
-            await service.BuildCatalog(input.Solutions.Where(File.Exists), solutionProperties);
+	        var theme = Theme.Default;
+
+	        var reporter = input.HtmlFlag
+		        ? (IStructureMapWiringReporter)new StructureMapWiringHtmlReporter()
+		        : new StructureMapWiringConsoleReporter(theme);
+
+            await service.BuildCatalog(input.Solutions.Where(File.Exists), reporter, solutionProperties);
 
             return true;
         }

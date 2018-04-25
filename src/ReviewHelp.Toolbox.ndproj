@@ -16,6 +16,7 @@
     <Name>System</Name>
     <Name>Microsoft.CodeAnalysis.CSharp</Name>
     <Name>Microsoft.CodeAnalysis.Workspaces.Desktop</Name>
+    <Name>HtmlAgilityPack</Name>
   </FrameworkAssemblies>
   <Dirs>
     <Dir>C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319</Dir>

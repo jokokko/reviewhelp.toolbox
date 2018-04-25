@@ -23,9 +23,9 @@ namespace ReviewHelp.Toolbox.Analyzers
 			ctx.RegisterSyntaxNodeAction(analyzer.Analyze, SyntaxKind.InvocationExpression);
 		}
 
-		private readonly ConcurrentBag<WiringCtx> wirings = new ConcurrentBag<WiringCtx>();
+		private readonly ConcurrentBag<StructureMapWiringCtx> wirings = new ConcurrentBag<StructureMapWiringCtx>();
 
-		public IEnumerable<WiringCtx> GetWirings()
+		public IEnumerable<StructureMapWiringCtx> GetWirings()
 		{
 			return wirings;
 		}
@@ -62,14 +62,14 @@ namespace ReviewHelp.Toolbox.Analyzers
 				this.host = host;								
 			}
 
-			private static readonly Dictionary<string, Lifecycle> LifecycleMap = new Dictionary<string, Lifecycle>
+			private static readonly Dictionary<string, StructureMapLifecycle> LifecycleMap = new Dictionary<string, StructureMapLifecycle>
 			{
-				{ "StructureMap.Pipeline.SingletonLifecycle", Lifecycle.Singleton },
-				{ "StructureMap.Pipeline.ContainerLifecycle", Lifecycle.Container },
-				{ "StructureMap.Pipeline.ThreadLocalStorageLifecycle", Lifecycle.ThreadLocal },
-				{ "StructureMap.Pipeline.TransientLifecycle", Lifecycle.Transient },
-				{ "StructureMap.Pipeline.UniquePerRequestLifecycle", Lifecycle.Unique },
-				{ "StructureMap.Pipeline.ChildContainerSingletonLifecycle", Lifecycle.ChildContainerSingleton }
+				{ "StructureMap.Pipeline.SingletonLifecycle", StructureMapLifecycle.Singleton },
+				{ "StructureMap.Pipeline.ContainerLifecycle", StructureMapLifecycle.Container },
+				{ "StructureMap.Pipeline.ThreadLocalStorageLifecycle", StructureMapLifecycle.ThreadLocal },
+				{ "StructureMap.Pipeline.TransientLifecycle", StructureMapLifecycle.Transient },
+				{ "StructureMap.Pipeline.UniquePerRequestLifecycle", StructureMapLifecycle.Unique },
+				{ "StructureMap.Pipeline.ChildContainerSingletonLifecycle", StructureMapLifecycle.ChildContainerSingleton }
 				// ObjectLifecycle SM for injected instances
 			};
 
@@ -96,11 +96,11 @@ namespace ReviewHelp.Toolbox.Analyzers
 					select new StructureMapConfigurationInvocation(methodSymbol, i)).ToArray();
 
 				ITypeSymbol plugin;				
-				Lifecycle lifecycle = null;
+				StructureMapLifecycle lifecycle = null;
 
 				if (method.Name.Equals("ForSingletonOf"))
 				{
-					lifecycle = Lifecycle.Singleton;
+					lifecycle = StructureMapLifecycle.Singleton;
 				}
 
 				ITypeSymbol PluginFromArgument(ExpressionSyntax expr)
@@ -127,7 +127,7 @@ namespace ReviewHelp.Toolbox.Analyzers
 					return null;
 				}
 
-				Lifecycle LifecycleFromArgument(ExpressionSyntax expr)
+				StructureMapLifecycle LifecycleFromArgument(ExpressionSyntax expr)
 				{
 					var lifecycleType = context.SemanticModel.GetTypeInfo(expr).Type;
 					return LifecycleMap[lifecycleType.ToDisplayString()];
@@ -159,7 +159,7 @@ namespace ReviewHelp.Toolbox.Analyzers
 					return;
 				}
 
-				Lifecycle FromInvocation(StructureMapConfigurationInvocation i)
+				StructureMapLifecycle FromInvocation(StructureMapConfigurationInvocation i)
 				{
 					switch (i.MethodSymbol.Name)
 					{
@@ -178,15 +178,15 @@ namespace ReviewHelp.Toolbox.Analyzers
 						}
 						case "Singleton":
 						{
-							return Lifecycle.Singleton;							
+							return StructureMapLifecycle.Singleton;							
 						}
 						case "AlwaysUnique":
 						{
-							return Lifecycle.Unique;							
+							return StructureMapLifecycle.Unique;							
 						}
 						case "Transient":
 						{
-							return Lifecycle.Transient;							
+							return StructureMapLifecycle.Transient;							
 						}
 						default:
 						{
@@ -195,7 +195,7 @@ namespace ReviewHelp.Toolbox.Analyzers
 					}					
 				}
 
-				lifecycle = lifecycle ?? invocations.Select(FromInvocation).FirstOrDefault(x => x != null) ?? Lifecycle.TransientImplicit;
+				lifecycle = lifecycle ?? invocations.Select(FromInvocation).FirstOrDefault(x => x != null) ?? StructureMapLifecycle.TransientImplicit;
 
 				var concretesPluggedBy = new[] {"Use", "Add"};
 
@@ -231,7 +231,9 @@ namespace ReviewHelp.Toolbox.Analyzers
 					concretePlugin = ConcretePluginFrom(concretePluginInvocation);
 				}
 				
-				var wiringCtx = new WiringCtx(node, plugin, lifecycle, concretePlugin);
+				var assembly = method.ContainingAssembly;
+
+				var wiringCtx = new StructureMapWiringCtx(node, plugin, lifecycle, assembly, concretePlugin);
 				
 				host.wirings.Add(wiringCtx);
 			}
