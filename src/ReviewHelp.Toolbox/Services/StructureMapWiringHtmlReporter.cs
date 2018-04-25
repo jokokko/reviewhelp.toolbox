@@ -20,9 +20,9 @@ namespace ReviewHelp.Toolbox.Services
 			var tableHeader = HtmlNode.CreateNode( $@"<thead><tr><th>Plugin</th><th>Concrete Plugin</th><th>Lifecycle</th><th>Assembly</th><th>Source Location</th></thead>");
 			var tableBody = doc.CreateElement("tbody");
 
-			tableBody = items.OrderBy(x => x.Assembly).ThenBy(x => x.Lifecycle.Name).Aggregate(tableBody, (node, w) =>
+			tableBody = items.OrderBy(x => x.Assembly?.Name).ThenBy(x => x.Lifecycle.Name).Aggregate(tableBody, (node, w) =>
 			{
-				var row = HtmlNode.CreateNode($@"<tr><td><pre>{w.Plugin.ToDisplayString().Enc()}</pre></td><td><pre>{w.ConcretePlugin.ToDisplayString().Enc()}</pre></td><td><pre>{w.Lifecycle.Name.Enc()}</pre></td><td><pre>{w.Assembly.Name.Enc()}</pre></td><td><pre>{w.Invocation.GetLocation().ToString().Enc()}</pre></td></tr>");
+				var row = HtmlNode.CreateNode($@"<tr><td><pre>{w.Plugin.ToDisplayString().Enc()}</pre></td><td><pre>{w.ConcretePlugin?.ToDisplayString().Enc()}</pre></td><td><pre>{w.Lifecycle.Name.Enc()}</pre></td><td><pre>{w.Assembly?.Name.Enc()}</pre></td><td><pre>{w.Invocation.GetLocation().ToString().Enc()}</pre></td></tr>");
 
 				tableBody.AppendChild(row);
 

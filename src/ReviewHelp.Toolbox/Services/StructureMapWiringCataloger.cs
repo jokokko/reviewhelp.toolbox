@@ -18,7 +18,12 @@ namespace ReviewHelp.Toolbox.Services
                 throw new ArgumentNullException(nameof(solutions));
             }
 
-            var solutionsToAnalyze = solutions as string[] ?? solutions.ToArray();
+	        if (reporter == null)
+	        {
+		        throw new ArgumentNullException(nameof(reporter));
+	        }
+
+	        var solutionsToAnalyze = solutions as string[] ?? solutions.ToArray();
 
             if (!solutionsToAnalyze.Any())
             {

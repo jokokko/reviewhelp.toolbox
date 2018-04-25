@@ -124,6 +124,12 @@ namespace ReviewHelp.Toolbox.Analyzers
 						}
 					}
 
+					if (expr is IdentifierNameSyntax ins)
+					{						
+						var sym = context.SemanticModel.GetTypeInfo(ins);
+						return sym.Type;
+					}
+
 					return null;
 				}
 
@@ -231,7 +237,7 @@ namespace ReviewHelp.Toolbox.Analyzers
 					concretePlugin = ConcretePluginFrom(concretePluginInvocation);
 				}
 				
-				var assembly = method.ContainingAssembly;
+				var assembly = context.Compilation.Assembly;
 
 				var wiringCtx = new StructureMapWiringCtx(node, plugin, lifecycle, assembly, concretePlugin);
 				

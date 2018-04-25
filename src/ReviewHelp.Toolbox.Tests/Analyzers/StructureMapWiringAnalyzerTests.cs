@@ -43,6 +43,7 @@ class TestClass {
 				c.For<If>().LifecycleIs<SingletonLifecycle>().Use(() => new T());
 				c.ForSingletonOf(typeof(If)).Use(""desc"", ctx => k);				
 				c.ForSingletonOf(typeof(If)).Use(typeof(T));
+				c.For(typeof(If)).Singleton().Use(k);
 
 				c.For<If>().AlwaysUnique().Use<T>();
 				c.For<If>().LifecycleIs(new UniquePerRequestLifecycle()).Use<T>();
@@ -75,7 +76,7 @@ class TestClass {
 
 			var grouped = wirings.GroupBy(x => x.Lifecycle).ToDictionary(x => x.Key, x => x.ToArray());
 			
-			Assert.Equal(15, grouped[StructureMapLifecycle.Singleton].Length);
+			Assert.Equal(16, grouped[StructureMapLifecycle.Singleton].Length);
 			Assert.Equal(2, grouped[StructureMapLifecycle.Unique].Length);
 			Assert.Equal(3, grouped[StructureMapLifecycle.Transient].Length);
 			Assert.Equal(2, grouped[StructureMapLifecycle.TransientImplicit].Length);

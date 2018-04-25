@@ -5,17 +5,17 @@ using System.Reflection;
 [assembly: AssemblyDescriptionAttribute("Supplemental tools for ReviewHelp.Analyzers")]
 [assembly: AssemblyProductAttribute("ReviewHelp.Toolbox")]
 [assembly: AssemblyCopyrightAttribute("Joona-Pekka Kokko")]
-[assembly: AssemblyVersionAttribute("1.1.0.0")]
-[assembly: AssemblyFileVersionAttribute("1.1.0.0")]
-[assembly: AssemblyInformationalVersionAttribute("1.1.0.0")]
+[assembly: AssemblyVersionAttribute("1.1.1.0")]
+[assembly: AssemblyFileVersionAttribute("1.1.1.0")]
+[assembly: AssemblyInformationalVersionAttribute("1.1.1.0")]
 namespace System {
     internal static class AssemblyVersionInformation {
         internal const System.String AssemblyTitle = "ReviewHelp.Toolbox";
         internal const System.String AssemblyDescription = "Supplemental tools for ReviewHelp.Analyzers";
         internal const System.String AssemblyProduct = "ReviewHelp.Toolbox";
         internal const System.String AssemblyCopyright = "Joona-Pekka Kokko";
-        internal const System.String AssemblyVersion = "1.1.0.0";
-        internal const System.String AssemblyFileVersion = "1.1.0.0";
-        internal const System.String AssemblyInformationalVersion = "1.1.0.0";
+        internal const System.String AssemblyVersion = "1.1.1.0";
+        internal const System.String AssemblyFileVersion = "1.1.1.0";
+        internal const System.String AssemblyInformationalVersion = "1.1.1.0";
     }
 }
