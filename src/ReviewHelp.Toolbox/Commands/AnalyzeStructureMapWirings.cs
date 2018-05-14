@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using Oakton;
 using ReviewHelp.Toolbox.Model;
 using ReviewHelp.Toolbox.Services;
@@ -9,7 +10,8 @@ using ReviewHelp.Toolbox.Services;
 namespace ReviewHelp.Toolbox.Commands
 {
     [Description("Analyze wired plugins and their lifecycles in StructureMap configurations", Name = "structuremap-wirings")]
-    public sealed class AnalyzeStructureMapWirings : OaktonAsyncCommand<SolutionInput>
+	[UsedImplicitly]
+	public sealed class AnalyzeStructureMapWirings : OaktonAsyncCommand<SolutionInput>
     {
         public override async Task<bool> Execute(SolutionInput input)
         {

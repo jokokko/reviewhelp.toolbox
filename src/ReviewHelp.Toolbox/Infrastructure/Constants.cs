@@ -3,5 +3,6 @@
     internal static class Constants
     {
 	    public static readonly string StructureMapAssembly = "StructureMap";
-    }
+	    public static readonly string LamarAssembly = "Lamar";
+	}
 }

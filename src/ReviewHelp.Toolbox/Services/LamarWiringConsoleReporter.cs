@@ -5,21 +5,21 @@ using ReviewHelp.Toolbox.Model;
 
 namespace ReviewHelp.Toolbox.Services
 {
-	public sealed class StructureMapWiringConsoleReporter : IStructureMapWiringReporter
+	public sealed class LamarWiringConsoleReporter : ILamarWiringReporter
 	{
 		private readonly Theme theme;
 
-		public StructureMapWiringConsoleReporter(Theme theme)
+		public LamarWiringConsoleReporter(Theme theme)
 		{
 			this.theme = theme;
 		}
 
-		private static void WriteLocations(StructureMapWiringCtx item)
+		private static void WriteLocations(LamarWiringCtx item)
 		{
 			Console.WriteLine($"\t\t{item.Invocation.GetLocation()}");
 		}
 
-		public void WriteWirings(IEnumerable<StructureMapWiringCtx> wirings, string header = null)
+		public void WriteWirings(IEnumerable<LamarWiringCtx> wirings, string header = null)
 		{
 			var wiringsGrouped =
 				from w in wirings

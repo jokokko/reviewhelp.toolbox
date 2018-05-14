@@ -86,8 +86,9 @@ namespace ReviewHelp.Toolbox.Tests.Infrastructure
 		{
 			var referencedAssemblies = typeof(TestHelper).Assembly.GetReferencedAssemblies()				
 				.Concat(typeof(StructureMapWiringAnalyzer).Assembly.GetReferencedAssemblies())
-				.Concat(typeof(Container).Assembly.GetReferencedAssemblies())				
-				.Concat(new[] { typeof(IsolationLevel).Assembly.GetName(), typeof(object).Assembly.GetName() });
+				.Concat(typeof(Container).Assembly.GetReferencedAssemblies())
+				.Concat(typeof(Lamar.Container).Assembly.GetReferencedAssemblies())
+				.Concat(new[] { typeof(Enum).Assembly.GetName(), typeof(object).Assembly.GetName(), new AssemblyName("netstandard, Version=2.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51") });
 
 			var ignore = new[] {"System","System.Transactions","System.Drawing"};
 

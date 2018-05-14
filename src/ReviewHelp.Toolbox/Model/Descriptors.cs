@@ -10,6 +10,7 @@ namespace ReviewHelp.Toolbox.Model
             return new DiagnosticDescriptor(id, title, messageFormat, category.Name, defaultSeverity, true, description);
         }
         
-	    internal static readonly DiagnosticDescriptor StructureMap1000WiredPluginsAndLifecycles = Rule("SM1000", "Wired plugin and liefycle", RuleCategory.Usage, DiagnosticSeverity.Info, "liefycle");
+	    internal static readonly DiagnosticDescriptor StructureMap1000WiredPluginsAndLifecycles = Rule("SM1000", "Wired plugin and lifecycle", RuleCategory.Usage, DiagnosticSeverity.Info, "lifecycle");
+	    internal static readonly DiagnosticDescriptor Lamar1000WiredPluginsAndLifecycles = Rule("LM1000", "Wired plugin and lifecycle", RuleCategory.Usage, DiagnosticSeverity.Info, "lifecycle");
 	}
 }

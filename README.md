@@ -4,5 +4,6 @@ Framework specific tools supplementing [ReviewHelp.Analyzers](https://github.com
 
 Available functionality:
 - Build a catalog of wired plugins and wiring lifecycles from [StructureMap](http://structuremap.github.io/) configurations. The scanning can span multiple solutions.
+- Build a catalog of wired plugins and wiring lifecycles from [Lamar](https://github.com/JasperFx/lamar) configurations. The scanning can span multiple solutions.
 
 ![Screenshot of console](assets/consolescreenshot.png)
